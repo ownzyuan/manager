@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manager.mapper.AdminMapper">
+
+    <!--通过用户名查询到相应管理员-->
+    <select id="selectUsername" resultType="admin" parameterType="String">
+        SELECT * FROM manager.admin
+        WHERE username=#{username}
+    </select>
+
+    <!--添加管理员-->
+    <insert id="insertAdmin" parameterType="admin">
+        INSERT INTO manager.admin(username, password)
+        VALUES (#{username},#{password})
+    </insert>
+
+    <!--管理员工：添加-->
+    <insert id="addEmp" parameterType="employee">
+        INSERT INTO manager.employee(name, age, gender, birth, id_card, department_name)
+        VALUES (#{name},#{age},#{gender},#{birth},#{id_card},#{department_name})
+    </insert>
+
+    <!--管理员工：通过id查找到对应员工-->
+    <select id="getEmpById" resultType="Employee" parameterType="int">
+        SELECT * FROM manager.employee WHERE id=#{id}
+    </select>
+
+    <!--管理员工：修改-->
+    <update id="updateEmp" parameterType="employee">
+        UPDATE manager.employee
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">
+                `name` = #{name},
+            </if>
+            <if test="age != null">
+                `age` = #{age},
+            </if>
+            <if test="gender != null">
+                `gender` = #{gender},
+            </if>
+            <if test="gender != null">
+                `gender` = #{gender},
+            </if>
+            <if test="birth != null">
+                `birth` = #{birth},
+            </if>
+            <if test="id_card != null">
+                `id_card` = #{id_card},
+            </if>
+            <if test="department_name != null">
+                `department_name` = #{department_name}
+            </if>
+        </trim>
+        WHERE `id` = #{id}
+    </update>
+
+    <!--管理员工：删除-->
+    <delete id="deleteEmp" parameterType="int">
+        DELETE FROM manager.employee
+        WHERE id = #{id};
+    </delete>
+
+</mapper>

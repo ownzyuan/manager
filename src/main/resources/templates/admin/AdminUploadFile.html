@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AdminFileUpload</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/signin.css}" rel="stylesheet">
+</head>
+
+<body class="text-center">
+
+<h1>单文件</h1>
+<form class="form-signin" th:action="@{/fileUpload/singleFile}" method="post" enctype="multipart/form-data">
+    <p><input type="file" name="myfile"/></p>
+    <p><input type="submit" value="上传"/></p>
+    <p style="color: red" th:text="${result_singlefile}" th:if="${not #strings.isEmpty(result_singlefile)}"></p>
+</form>
+
+<h1>多文件</h1>
+<form class="form-signin" th:action="@{/fileUpload/multiFile}" method="post" enctype="multipart/form-data">
+    <p><input type="file" name="myfile"/></p>
+    <p><input type="file" name="myfile"/></p>
+    <p><input type="file" name="myfile"/></p>
+    <p><input type="submit" value="上传"/></p>
+    <p style="color: red" th:text="${result_multifile}" th:if="${not #strings.isEmpty(result_multifile)}"></p>
+</form>
+
+</body>
+
+</html>

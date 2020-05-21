@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manager.mapper.EmployeeMapper">
+
+    <!--通过map，可以使用employee中若干属性查找对应员工-->
+    <select id="selectByAnyway" parameterType="map" resultType="employee">
+        SELECT * FROM manager.employee
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="id != null">
+                `id` = #{id}
+            </if>
+            <if test="name != null">
+                AND `name` = #{name}
+            </if>
+            <if test="idCard != null">
+                AND `id_card` = #{idCard}
+            </if>
+        </trim>
+    </select>
+
+    <!--更新员工资料-->
+    <update id="updateById" parameterType="employee">
+        UPDATE manager.employee
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">
+                `name` = #{name},
+            </if>
+            <if test="age != null">
+                `age` = #{age},
+            </if>
+            <if test="gender != null">
+                `gender` = #{gender},
+            </if>
+            <if test="gender != null">
+                `gender` = #{gender},
+            </if>
+            <if test="birth != null">
+                `birth` = #{birth},
+            </if>
+            <if test="id_card != null">
+                `id_card` = #{id_card},
+            </if>
+            <if test="department_name != null">
+                `department_name` = #{department_name}
+            </if>
+        </trim>
+        WHERE `id` = #{id}
+    </update>
+
+    <!--查询全部员工-->
+    <select id="queryAllEmp" resultType="Employee">
+        SELECT * FROM manager.employee;
+    </select>
+
+</mapper>
